@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+</head>
+<body style="background-image: url('{{ url_for('static', filename='todo.avif') }}'); width: 100%; height: 100vh;">
+    <h1 style="color: darkslategray">Todo List</h1>
+    <div style="color: darkslategray">Add a new todo item: 
+    
+        <form action="{{ url_for('add') }}" method="POST">
+            <input type="text" name="todoitem" >
+            <input type="submit" value="Add Item" style="color: darkslategray; background: black">
+        </form>
+    </div>
+    <div>
+        <h2 style="color: brown">Incomplete Items</h2>
+        <ul>
+            {% for todo in incomplete %}
+            <li style="font-size: 30pt; color: brown">{{ todo.text }} <a href="{{ url_for('complete', id=todo.id) }}" style="color: darkslategray">Mark As Complete</a></li>
+            {% endfor %}    
+        </ul>
+        <h2 style="color: brown">Completed Items</h2>
+        <ul>
+            {% for todo in complete %}
+            <li style="font-size: 30pt; color: brown">{{ todo.text }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
